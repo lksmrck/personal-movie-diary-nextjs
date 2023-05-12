@@ -9,31 +9,31 @@ import {
   SetStateAction,
 } from "react";
 
-interface SearchContextInterface {
+interface MoviesContextInterface {
   testValue: /* User | null; */ any;
   setTestValue: /* Dispatch<SetStateAction<User | null>>; */ any;
 }
 
-export const SearchContext = createContext({} as SearchContextInterface);
+export const MoviesContext = createContext({} as MoviesContextInterface);
 
-export const SearchContextProvider: FC<{
+export const MoviesContextProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   const [testValue, setTestValue] = useState(true);
 
   return (
-    <SearchContext.Provider
+    <MoviesContext.Provider
       value={{
         testValue,
         setTestValue,
       }}
     >
       {children}
-    </SearchContext.Provider>
+    </MoviesContext.Provider>
   );
 };
-const useSearch = () => {
-  return useContext(SearchContext);
+const useMovies = () => {
+  return useContext(MoviesContext);
 };
 
-export default useSearch;
+export default useMovies;
