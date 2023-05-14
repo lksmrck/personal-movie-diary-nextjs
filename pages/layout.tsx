@@ -1,5 +1,6 @@
 import { ReactNode, FC } from "react";
 import Navbar from "@components/navbar/Navbar";
+import Provider from "@components/Provider";
 
 //TODO: metadata
 export const metadata = {
