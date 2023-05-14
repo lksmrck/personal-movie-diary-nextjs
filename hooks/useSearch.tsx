@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// DELETE - RESIM PRES SEARCH CONTEXT
+
 const useSearch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);

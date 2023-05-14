@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +8,16 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.blue_gradient {
+  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+}
+
+.head_text {
+  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-zinc-300 sm:text-6xl;
+}
+
+.blue_btn {
+  @apply rounded-full border border-black bg-blue-950 py-1.5 px-5 text-white transition-all hover:bg-blue-800 text-center text-sm  flex items-center justify-center;
 }
