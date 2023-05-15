@@ -19,8 +19,6 @@ const getGoogleCredentials = () => {
   return { clientId, clientSecret };
 };
 
-console.log(getGoogleCredentials().clientId);
-
 const handler = NextAuth({
   providers: [
     GoogleProvider({
