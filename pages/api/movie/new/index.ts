@@ -49,7 +49,7 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
     if (usersOldMovies.length > 0) {
       // If user already has some movies added, pushes movie into his array
       await UserData.updateOne(
-        { email: /*  session?.user?.email  */ "thatonelukas@gmail.com" },
+        { email: /* session?.user?.email */ "thatonelukas@gmail.com" },
         { $push: { movies: newMovie } }
       );
     } else {

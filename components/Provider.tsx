@@ -1,8 +1,8 @@
 "use client";
 import { SessionProvider } from "next-auth/react";
 import { FC, ReactNode } from "react";
-/* import { SearchContextProvider } from "@context/SearchContext";
-import { MoviesContextProvider } from "@context/MoviesContext"; */
+import { SearchContextProvider } from "@context/SearchContext";
+import { MoviesContextProvider } from "@context/MoviesContext";
 
 // TODO: session type
 const Provider: FC<{ children: ReactNode; session: any }> = ({
@@ -11,11 +11,9 @@ const Provider: FC<{ children: ReactNode; session: any }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      {/*       <SearchContextProvider>
-        <MoviesContextProvider> */}
-      {children}
-      {/* </MoviesContextProvider>
-      </SearchContextProvider> */}
+      <SearchContextProvider>
+        <MoviesContextProvider>{children}</MoviesContextProvider>
+      </SearchContextProvider>
     </SessionProvider>
   );
 };

@@ -1,64 +1,68 @@
-// import {
-//   createContext,
-//   ReactNode,
-//   useState,
-//   useEffect,
-//   FC,
-//   useContext,
-//   Dispatch,
-//   SetStateAction,
-// } from "react";
+import {
+  createContext,
+  ReactNode,
+  useState,
+  useEffect,
+  FC,
+  useContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-// interface SearchContextInterface {
-//   isLoading: boolean;
-//   isError: boolean;
-//   getMovies: (url: string) => void;
-// }
+interface SearchContextInterface {
+  isLoading: boolean;
+  isError: boolean;
+  getMovies: (searchTerm: string) => any;
+}
 
-// export const SearchContext = createContext({} as SearchContextInterface);
+export const SearchContext = createContext({} as SearchContextInterface);
 
-// export const SearchContextProvider: FC<{
-//   children: ReactNode;
-// }> = ({ children }) => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [isError, setIsError] = useState(false);
+export const SearchContextProvider: FC<{
+  children: ReactNode;
+}> = ({ children }) => {
+  const [foundMovies, setFoundMovies] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-//   const getMovies = async (url: string) => {
-//     setIsLoading(true);
+  const url =
+    "https://api.themoviedb.org/3/search/movie?api_key=274808d92789c49e637a022e855f63dd&query=";
 
-//     try {
-//       fetch(url).then((data: any) => {
-//         return data.results;
-//         setIsLoading(false);
-//       });
-//     } catch (error) {
-//       setIsLoading(false);
-//       setIsError(true);
-//     }
-//   };
+  const getMovies = async (searchTerm: string) => {
+    setIsLoading(true);
 
-//   return (
-//     <SearchContext.Provider
-//       value={{
-//         isLoading,
-//         isError,
-//         getMovies,
-//       }}
-//     >
-//       {children}
-//     </SearchContext.Provider>
-//   );
-// };
-// /* const useSearch = () => {
-//   return useContext(SearchContext);
-// };
+    try {
+      /*     if (!process.env.MOVIE_DB_URL) return; */
 
-// export default useSearch; */
+      fetch(url + searchTerm).then((res: any) => {
+        return res.json().then((data: any) => {
+          console.log(data.results);
+          setFoundMovies(data.results);
+          setIsLoading(false);
+          setIsError(false);
+        });
+        /* return res.results; */
+      });
+    } catch (error) {
+      setIsLoading(false);
+      setIsError(true);
+      return;
+    }
+  };
 
-import React from "react";
-
-const SearchContext = () => {
-  return <div>SearchContext</div>;
+  return (
+    <SearchContext.Provider
+      value={{
+        isLoading,
+        isError,
+        getMovies,
+      }}
+    >
+      {children}
+    </SearchContext.Provider>
+  );
+};
+const useSearch = () => {
+  return useContext(SearchContext);
 };
 
-export default SearchContext;
+export default useSearch;
